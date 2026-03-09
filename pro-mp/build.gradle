@@ -1,7 +1,7 @@
 group = 'dr.sbs'
 version = "1.0.0"
 archivesBaseName = 'mp'
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 description = 'Spring Boot Starter Mybatis Plus Generator.'
 
 mainClassName = 'dr.sbs.mp.App'

@@ -1,7 +1,7 @@
 package dr.sbs.admin.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 /** 用户登录参数 */
 public class AdminLoginParam {

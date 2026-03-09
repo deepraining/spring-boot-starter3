@@ -3,7 +3,7 @@ package dr.sbs.common.util;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class RequestUtil {
   /** Get url basePath, scheme://domain:port */

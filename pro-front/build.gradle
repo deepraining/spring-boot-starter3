@@ -7,7 +7,7 @@ group = 'dr.sbs'
 // version should not have '-'
 version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
 archivesBaseName = 'sbs-front'
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 description = 'Spring Boot Starter Front Application.'
 
 mainClassName = 'dr.sbs.front.App'
@@ -17,10 +17,10 @@ jar {
 }
 
 dependencies {
-  implementation 'org.springframework.boot:spring-boot-starter-security:2.7.18'
+  implementation 'org.springframework.boot:spring-boot-starter-security:3.5.11'
   implementation 'org.springframework.session:spring-session-data-redis:2.7.4'
-  implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.7.18'
-  implementation 'org.springframework.boot:spring-boot-starter-websocket:2.7.18'
+  implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.5.11'
+  implementation 'org.springframework.boot:spring-boot-starter-websocket:3.5.11'
 
   // projects
   implementation project(':pro-mp')

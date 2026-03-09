@@ -1,6 +1,6 @@
 package dr.sbs.front.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ public class CommonController implements ErrorController {
 
   @GetMapping(value = ERROR_PATH)
   public String handleError(HttpServletRequest request) {
-    final Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+    final Integer statusCode = (Integer) request.getAttribute("jakarta.servlet.error.status_code");
 
     log.error("Error path: [{}], status: [{}]", ERROR_PATH, statusCode);
 
