@@ -8,7 +8,7 @@ import java.util.Collections;
 public class App {
   public static void main(String[] args) {
     String url =
-        "jdbc:mysql://127.0.0.1:3306/starter2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai";
+        "jdbc:mysql://127.0.0.1:3306/starter3?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai";
     String username = "root";
     String password = "root123456";
     String javaFilePath = "src/main/java";

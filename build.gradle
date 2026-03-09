@@ -86,24 +86,12 @@ subprojects {
 def mpMapperPath = 'pro-mp/src/main/java/dr/sbs/mp/mapper/'
 def mpEntityPath = 'pro-mp/src/main/java/dr/sbs/mp/entity/'
 def mpServicePath = 'pro-mp/src/main/java/dr/sbs/mp/service/'
-def mp2MapperPath = 'pro-dds-mp2/src/main/java/dr/sbs/mp2/mapper/'
-def mp2EntityPath = 'pro-dds-mp2/src/main/java/dr/sbs/mp2/entity/'
-def mp2ServicePath = 'pro-dds-mp2/src/main/java/dr/sbs/mp2/service/'
-def mp3MapperPath = 'pro-dds-mp3/src/main/java/dr/sbs/mp3/mapper/'
-def mp3EntityPath = 'pro-dds-mp3/src/main/java/dr/sbs/mp3/entity/'
-def mp3ServicePath = 'pro-dds-mp3/src/main/java/dr/sbs/mp3/service/'
 
 googleJavaFormat {
   toolVersion = "1.7"
   exclude mpMapperPath
   exclude mpEntityPath
   exclude mpServicePath
-  exclude mp2MapperPath
-  exclude mp2EntityPath
-  exclude mp2ServicePath
-  exclude mp3MapperPath
-  exclude mp3EntityPath
-  exclude mp3ServicePath
 }
 
 checkstyle {
@@ -124,12 +112,6 @@ task checkJava(type: Checkstyle) {
   exclude mpMapperPath
   exclude mpEntityPath
   exclude mpServicePath
-  exclude mp2MapperPath
-  exclude mp2EntityPath
-  exclude mp2ServicePath
-  exclude mp3MapperPath
-  exclude mp3EntityPath
-  exclude mp3ServicePath
 
   if (System.properties.checkJavaInclude != null) {
     def s = ((String)System.properties.checkJavaInclude).split(',')

@@ -1,9 +1,0 @@
-spring:
-  devtools:
-    restart:
-      enabled: false
-
-logging:
-  level:
-    org.springframework.web: ERROR
-    dr.sbs: ERROR
