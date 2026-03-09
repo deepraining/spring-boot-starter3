@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spring Boot Starter Front Application</title>
+</head>
+<body>
+<h2>User Information</h2>
+<div id="user-logged-in" style="display: none">
+  <p id="user-info"></p>
+  <p><a href="/user">My Home</a></p>
+  <p><a href="/user/chat">My Chat</a></p>
+  <p><a href="/article/create">Create Article</a></p>
+  <p><a href="/account/updatePassword">Update Password</a></p>
+  <p><a href="" id="to-logout">Logout</a></p>
+</div>
+<div id="user-login">
+  <p><a href="/account/login">Login</a></p>
+  <p><a href="/account/register">Sign Up</a></p>
+</div>
+<h2>Article</h2>
+<p id="article-info"></p>
+<table style="width: 100%;">
+  <thead>
+  <tr>
+    <td>Id</td>
+    <td>Title</td>
+    <td>Read Count</td>
+    <td>Support Count</td>
+    <td>Article Summary</td>
+    <td>User Id</td>
+    <td>Create Time</td>
+    <td>Update Time</td>
+    <td>Operations</td>
+  </tr>
+  </thead>
+  <tbody id="article-tbody"></tbody>
+</table>
+</body>
+<script src="/static/index.js"></script>
+</html>

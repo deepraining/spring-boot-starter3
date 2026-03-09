@@ -1,0 +1,37 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/starter2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root123456
+
+    hikari:
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+  redis:
+    host: localhost # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: # Redis服务器连接密码（默认为空）
+    timeout: 300ms # 连接超时时间（毫秒）
+
+  freemarker:
+    enabled: true
+    suffix: .html
+    cache: false
+    # run `npm run build` under project `sbs-admin-web` to generate `build` folder
+    # prefix: file:../../sbs-admin-web/build/
+    # run `npm run dev:disk` under project `sbs-admin-web` to generate `dev` folder
+    template-loader-path: file:../../sbs-admin-web/dev/
+    
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, file:../../sbs-admin-web/

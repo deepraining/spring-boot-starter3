@@ -1,0 +1,9 @@
+group = 'dr.sbs'
+version = "1.0.0"
+archivesBaseName = 'common'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Common Lib.'
+
+mainClassName = 'dr.sbs.common.App'
+
+dependencies {}

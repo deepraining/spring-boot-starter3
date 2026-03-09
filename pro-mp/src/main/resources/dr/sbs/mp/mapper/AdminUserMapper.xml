@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dr.sbs.mp.mapper.AdminUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="dr.sbs.mp.entity.AdminUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="nickname" property="nickname" />
+        <result column="note" property="note" />
+        <result column="last_login_time" property="lastLoginTime" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, avatar, email, nickname, note, last_login_time, status, create_time, update_time
+    </sql>
+
+</mapper>

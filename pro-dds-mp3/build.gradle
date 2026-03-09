@@ -1,0 +1,12 @@
+group = 'dr.sbs'
+version = "1.0.0"
+archivesBaseName = 'mp3'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Mybatis Plus Generator.'
+
+mainClassName = 'dr.sbs.mp3.App'
+
+dependencies {
+  implementation 'com.baomidou:mybatis-plus-generator:3.5.3.2'
+  implementation 'com.baomidou:dynamic-datasource-spring-boot-starter:3.6.1'
+}

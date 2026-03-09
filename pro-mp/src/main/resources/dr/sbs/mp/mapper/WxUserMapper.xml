@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dr.sbs.mp.mapper.WxUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="dr.sbs.mp.entity.WxUser">
+        <id column="id" property="id" />
+        <result column="nickname" property="nickname" />
+        <result column="avatar" property="avatar" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="district" property="district" />
+        <result column="phone" property="phone" />
+        <result column="register_date" property="registerDate" />
+        <result column="last_login" property="lastLogin" />
+        <result column="union_id" property="unionId" />
+        <result column="mini_open_id" property="miniOpenId" />
+        <result column="mp_open_id" property="mpOpenId" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, nickname, avatar, gender, birthday, province, city, district, phone, register_date, last_login, union_id, mini_open_id, mp_open_id, status, create_time, update_time
+    </sql>
+
+</mapper>

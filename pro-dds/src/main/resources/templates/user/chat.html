@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Chat</title>
+</head>
+<body>
+<h2>Chat Messages</h2>
+<div style="height: 50px"></div>
+<table>
+  <thead>
+  <tr>
+    <td>UserId</td>
+    <td>Message</td>
+    <td>Me</td>
+  </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+<div style="height: 50px"></div>
+<textarea id="input"></textarea>
+<button id="submit" type="submit">发送信息</button>
+</body>
+<script src="/static/user/ws.js"></script>
+<script src="/static/user/chat.js"></script>
+</html>

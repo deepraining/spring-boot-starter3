@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dr.sbs.admin.dao.AdminRoleDao">
+  <select id="getMenuList" resultMap="dr.sbs.mp.mapper.AdminMenuMapper.BaseResultMap">
+    SELECT
+      m.*
+    FROM
+      admin_role_menu_relation rmr
+        LEFT JOIN admin_menu m ON rmr.menu_id = m.id
+    WHERE
+      rmr.role_id = #{roleId}
+        AND rmr.status = 1
+        AND m.id IS NOT NULL
+        AND m.status = 1
+    GROUP BY
+      m.id
+  </select>
+  <select id="getResourceList" resultMap="dr.sbs.mp.mapper.AdminResourceMapper.BaseResultMap">
+    SELECT
+      r.*
+    FROM
+      admin_role_resource_relation rrr
+        LEFT JOIN admin_resource r ON rrr.resource_id = r.id
+    WHERE
+      rrr.role_id = #{roleId}
+        AND rrr.status = 1
+        AND r.id IS NOT NULL
+        AND r.status = 1
+    GROUP BY
+      r.id
+  </select>
+</mapper>
