@@ -1,6 +1,6 @@
 package dr.sbs.front.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdatePasswordParam {
-  @ApiModelProperty(value = "旧密码", required = true)
+  @Schema(description = "旧密码", requiredMode = Schema.RequiredMode.REQUIRED)
   @NotEmpty(message = "旧密码不能为空")
   private String oldPassword;
 
-  @ApiModelProperty(value = "新密码", required = true)
+  @Schema(description = "新密码", requiredMode = Schema.RequiredMode.REQUIRED)
   @NotEmpty(message = "新密码不能为空")
   private String newPassword;
 }

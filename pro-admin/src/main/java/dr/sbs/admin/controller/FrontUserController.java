@@ -32,13 +32,13 @@ public class FrontUserController {
   @ResponseBody
   public CommonResult<CommonPage<FrontUser>> list(
       @RequestParam(value = "pageSize", defaultValue = "10")
-          @Parameter(name = "每页条数")
+          @Parameter(description = "每页条数")
           Integer pageSize,
       @RequestParam(value = "pageNum", defaultValue = "1")
-          @Parameter(name = "页码")
+          @Parameter(description = "页码")
           Integer pageNum,
       @RequestParam(value = "searchKey", defaultValue = "")
-          @Parameter(name = "搜索关键字")
+          @Parameter(description = "搜索关键字")
           String searchKey) {
     Page<FrontUser> frontUserList = frontUserService.list(searchKey, pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(frontUserList));

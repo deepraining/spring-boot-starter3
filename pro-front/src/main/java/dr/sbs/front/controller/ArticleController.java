@@ -8,9 +8,9 @@ import dr.sbs.front.service.ArticleService;
 import dr.sbs.front.service.UserService;
 import dr.sbs.mp.entity.Article;
 import dr.sbs.mp.entity.FrontUser;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = "ArticleController", description = "Article management")
+@Tag(name = "ArticleController", description = "Article management")
 @RequestMapping("/api/article")
 public class ArticleController {
   @Autowired private ArticleService articleService;
   @Autowired private UserService userService;
 
-  @ApiOperation("Create article")
+  @Operation(summary = "Create article")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> create(
@@ -46,7 +46,7 @@ public class ArticleController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("Update article")
+  @Operation(summary = "Update article")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
@@ -70,7 +70,7 @@ public class ArticleController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("Delete article")
+  @Operation(summary = "Delete article")
   @RequestMapping(value = "/delete", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> delete(@RequestParam Long id) {
@@ -91,24 +91,24 @@ public class ArticleController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("Query list")
+  @Operation(summary = "Query list")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<Article>> list(
       @RequestParam(value = "pageSize", defaultValue = "10")
-          @ApiParam(value = "每页条数", defaultValue = "10")
+          @Parameter(description = "每页条数")
           Integer pageSize,
       @RequestParam(value = "pageNum", defaultValue = "1")
-          @ApiParam(value = "页码", defaultValue = "1")
+          @Parameter(description = "页码")
           Integer pageNum,
       @RequestParam(value = "searchKey", defaultValue = "")
-          @ApiParam(value = "搜索关键字", defaultValue = "")
+          @Parameter(description = "搜索关键字")
           String searchKey) {
     Page<Article> queryList = articleService.list(searchKey, pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(queryList));
   }
 
-  @ApiOperation("Get a record")
+  @Operation(summary = "Get a record")
   @RequestMapping(value = "/record/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<Article> record(@PathVariable long id) {

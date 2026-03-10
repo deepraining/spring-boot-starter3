@@ -48,6 +48,14 @@ mybatis-plus:
     - classpath:dao/**/*.xml
     - classpath*:dr/sbs/mp/mapper/*.xml
 
+springdoc:
+  packages-to-scan: dr.sbs.front.controller
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: false
+  api-docs:
+    enabled: true
+
 logging:
   level:
     org.springframework.web: ERROR

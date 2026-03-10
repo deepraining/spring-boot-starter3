@@ -45,6 +45,7 @@ mybatis-plus:
   mapper-locations:
     - classpath:dao/**/*.xml
     - classpath*:dr/sbs/mp/mapper/*.xml
+
 springdoc:
   packages-to-scan: dr.sbs.admin.controller
   swagger-ui:

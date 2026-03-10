@@ -6,8 +6,8 @@ import dr.sbs.front.dto.UserCreateParam;
 import dr.sbs.front.service.UserService;
 import dr.sbs.front.util.ResultFilter;
 import dr.sbs.mp.entity.FrontUser;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = "AccountController", description = "Sign up, Login, Password management")
+@Tag(name = "AccountController", description = "Sign up, Login, Password management")
 @RequestMapping("/api/account")
 public class AccountController {
   @Autowired private UserService userService;
 
-  @ApiOperation("Sign up")
+  @Operation(summary = "Sign up")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<FrontUser> register(
@@ -35,7 +35,7 @@ public class AccountController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("Update password")
+  @Operation(summary = "Update password")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> updatePassword(
@@ -46,7 +46,7 @@ public class AccountController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("Current user information")
+  @Operation(summary = "Current user information")
   @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<FrontUser> currentUser() {
