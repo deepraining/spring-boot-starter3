@@ -1,6 +1,6 @@
 package dr.sbs.admin.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +10,11 @@ import lombok.Setter;
 @Setter
 public class FrontUserCreateParam {
   // position从10开始，每次增加10，预防中间插入留置
-  @ApiModelProperty(value = "用户名", required = true, position = 10)
+  @Schema(description = "用户名", requiredMode = Schema.RequiredMode.REQUIRED)
   @NotEmpty(message = "用户名不能为空")
   private String username;
 
-  @ApiModelProperty(value = "电子邮箱", required = true, position = 20)
+  @Schema(description = "电子邮箱", requiredMode = Schema.RequiredMode.REQUIRED)
   @NotEmpty(message = "电子邮箱不能为空")
   private String email;
 }

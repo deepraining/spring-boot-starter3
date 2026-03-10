@@ -5,12 +5,18 @@ import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.crypto.SecretKey;
 
 /**
  * JwtToken生成的工具类 JWT token的格式：header.payload.signature header的格式（算法、token的类型）： {"alg":
@@ -34,18 +40,21 @@ public class JwtTokenUtil {
 
   /** 根据负载生成JWT的token */
   private String generateToken(Map<String, Object> claims) {
+    SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+
     return Jwts.builder()
-        .setClaims(claims)
-        .setExpiration(generateExpirationDate())
-        .signWith(SignatureAlgorithm.HS512, secret)
+        .claims(claims)
+        .expiration(generateExpirationDate())
+        .signWith(key)
         .compact();
   }
 
   /** 从token中获取JWT中的负载 */
   private Claims getClaimsFromToken(String token) {
+    SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     Claims claims = null;
     try {
-      claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+      claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
     } catch (Exception e) {
       log.info("JWT格式验证失败:{}", token);
     }

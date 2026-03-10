@@ -2,8 +2,7 @@ package dr.sbs.mp.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,37 +16,37 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ApiModel(value = "Article对象", description = "文章")
+@Schema(name = "Article", description = "文章")
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    @ApiModelProperty("标题")
+    @Schema(description = "标题")
     private String title;
 
-    @ApiModelProperty("简介")
+    @Schema(description = "简介")
     private String intro;
 
-    @ApiModelProperty("内容")
+    @Schema(description = "内容")
     private String content;
 
-    @ApiModelProperty("创建者 front_user id")
+    @Schema(description = "创建者 front_user id")
     private Long frontUserId;
 
-    @ApiModelProperty("阅读数")
+    @Schema(description = "阅读数")
     private Integer readCount;
 
-    @ApiModelProperty("点赞数")
+    @Schema(description = "点赞数")
     private Integer supportCount;
 
-    @ApiModelProperty("状态：-1 删除、0 禁用、1 启用")
+    @Schema(description = "状态：-1 删除、0 禁用、1 启用")
     private Byte status;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 }

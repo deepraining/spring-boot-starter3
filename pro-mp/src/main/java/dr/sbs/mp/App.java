@@ -22,7 +22,7 @@ public class App {
                   .author("deepraining") // 设置作者
                   .commentDate("") // 不显示时间
                   .disableOpenDir() // 不打开文件夹
-                  .enableSwagger() // 开启 swagger 模式
+                  .enableSpringdoc() // 开启 swagger 模式
                   .fileOverride() // 覆盖已生成文件
                   .outputDir(javaFilePath); // 指定输出目录
             })

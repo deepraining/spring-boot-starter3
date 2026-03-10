@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("admin_resource")
-@ApiModel(value = "AdminResource对象", description = "后台资源")
+@Schema(name = "AdminResource", description = "后台资源")
 public class AdminResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,24 +28,24 @@ public class AdminResource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("资源名称")
+    @Schema(description = "资源名称")
     private String name;
 
-    @ApiModelProperty("资源URL")
+    @Schema(description = "资源URL")
     private String url;
 
-    @ApiModelProperty("描述")
+    @Schema(description = "描述")
     private String description;
 
-    @ApiModelProperty("资源分类ID")
+    @Schema(description = "资源分类ID")
     private Integer categoryId;
 
-    @ApiModelProperty("状态：-1 删除、1 启用")
+    @Schema(description = "状态：-1 删除、1 启用")
     private Integer status;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 }

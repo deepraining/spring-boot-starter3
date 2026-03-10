@@ -3,8 +3,7 @@ package dr.sbs.mp.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,28 +18,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("front_user")
-@ApiModel(value = "FrontUser对象", description = "前端用户")
+@Schema(name = "FrontUser", description = "前端用户")
 public class FrontUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
-    @ApiModelProperty("用户名")
+    @Schema(description = "用户名")
     private String username;
 
-    @ApiModelProperty("电子邮箱")
+    @Schema(description = "电子邮箱")
     private String email;
 
-    @ApiModelProperty("密码")
+    @Schema(description = "密码")
     private String password;
 
-    @ApiModelProperty("状态：-1 删除、0 禁用、1 启用")
+    @Schema(description = "状态：-1 删除、0 禁用、1 启用")
     private Byte status;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 }

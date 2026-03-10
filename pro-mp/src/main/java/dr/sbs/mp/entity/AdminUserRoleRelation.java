@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("admin_user_role_relation")
-@ApiModel(value = "AdminUserRoleRelation对象", description = "后台用户和角色关系")
+@Schema(name = "AdminUserRoleRelation", description = "后台用户和角色关系")
 public class AdminUserRoleRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,12 +32,12 @@ public class AdminUserRoleRelation implements Serializable {
 
     private Integer roleId;
 
-    @ApiModelProperty("状态：-1 删除、1 启用")
+    @Schema(description = "状态：-1 删除、1 启用")
     private Integer status;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 }

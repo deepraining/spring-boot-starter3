@@ -6,9 +6,9 @@ import dr.sbs.admin.dto.ArticleRecord;
 import dr.sbs.admin.service.ArticleService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,29 +22,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /** 文章管理 */
 @Controller
-@Api(tags = "ArticleController", description = "文章管理")
+@Tag(name = "ArticleController", description = "文章管理")
 @RequestMapping("/article")
 public class ArticleController {
   @Autowired private ArticleService articleService;
 
-  @ApiOperation("查询文章列表")
+  @Operation(summary = "查询文章列表")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<ArticleRecord>> list(
       @RequestParam(value = "pageSize", defaultValue = "10")
-          @ApiParam(value = "每页条数", defaultValue = "10")
+          @Parameter(name = "每页条数")
           Integer pageSize,
       @RequestParam(value = "pageNum", defaultValue = "1")
-          @ApiParam(value = "页码", defaultValue = "1")
+      @Parameter(name = "页码")
           Integer pageNum,
       @RequestParam(value = "searchKey", defaultValue = "")
-          @ApiParam(value = "搜索关键字", defaultValue = "")
+          @Parameter(name = "搜索关键字")
           String searchKey) {
     Page<ArticleRecord> articleList = articleService.list(searchKey, pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(articleList));
   }
 
-  @ApiOperation("添加文章")
+  @Operation(summary = "添加文章")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> create(
@@ -57,7 +57,7 @@ public class ArticleController {
     }
   }
 
-  @ApiOperation("修改文章")
+  @Operation(summary = "修改文章")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
@@ -72,7 +72,7 @@ public class ArticleController {
     }
   }
 
-  @ApiOperation("根据ID删除文章")
+  @Operation(summary = "根据ID删除文章")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Long id) {

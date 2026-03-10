@@ -45,15 +45,20 @@ mybatis-plus:
   mapper-locations:
     - classpath:dao/**/*.xml
     - classpath*:dr/sbs/mp/mapper/*.xml
+springdoc:
+  packages-to-scan: dr.sbs.admin.controller
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: false
+  api-docs:
+    enabled: true
 
 secure:
   ignored:
     urls: # 安全路径白名单
       - /
-      - /swagger-ui.html
-      - /swagger-resources/**
-      - /swagger/**
-      - /**/v2/api-docs
+      - /swagger-ui/index.html
+      - /v3/api-docs/**
       - /**/*.js
       - /**/*.css
       - /**/*.png
@@ -62,7 +67,6 @@ secure:
       - /**/*.ttf
       - /**/*.woff
       - /**/*.woff2
-      - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
       - /admin/login
@@ -82,7 +86,7 @@ logging:
 
 jwt:
   tokenHeader: Authorization
-  secret: secret
+  secret: SecretSecretSecretSecretSecretSecretSecretSecret
   expiration: 604800
   tokenHead: Bearer
 

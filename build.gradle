@@ -51,17 +51,16 @@ subprojects {
     implementation 'org.springframework.boot:spring-boot-starter-aop:3.5.11'
     implementation 'org.springframework.boot:spring-boot-starter-logging:3.5.11'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.5.11'
+    implementation 'org.springframework.plugin:spring-plugin-core:3.0.0'
 
     // database
-    implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.3.2'
+    implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.16'
     implementation 'mysql:mysql-connector-java:8.0.16'
 
     // utils
     implementation 'com.sun.activation:jakarta.activation:2.0.1'
     implementation 'org.projectlombok:lombok:1.18.8'
-    implementation 'io.swagger:swagger-models:1.6.1'
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.16'
     implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
     implementation 'cn.hutool:hutool-core:4.5.10'
     implementation 'cn.hutool:hutool-json:4.5.10'

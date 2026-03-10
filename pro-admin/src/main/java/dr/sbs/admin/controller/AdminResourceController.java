@@ -6,9 +6,10 @@ import dr.sbs.admin.service.AdminResourceService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
 import dr.sbs.mp.entity.AdminResource;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,13 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /** 后台资源管理Controller */
 @Controller
-@Api(tags = "AdminResourceController", description = "后台资源管理")
+@Tag(name = "AdminResourceController", description = "后台资源管理")
 @RequestMapping("/adminResource")
 public class AdminResourceController {
   @Autowired private AdminResourceService resourceService;
   @Autowired private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
 
-  @ApiOperation("添加后台资源")
+  @Operation(summary = "添加后台资源")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> create(
@@ -42,7 +43,7 @@ public class AdminResourceController {
     }
   }
 
-  @ApiOperation("修改后台资源")
+  @Operation(summary = "修改后台资源")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
@@ -58,7 +59,7 @@ public class AdminResourceController {
     }
   }
 
-  @ApiOperation("根据ID获取资源详情")
+  @Operation(summary = "根据ID获取资源详情")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminResource> getItem(@PathVariable Integer id) {
@@ -66,7 +67,7 @@ public class AdminResourceController {
     return CommonResult.success(adminResource);
   }
 
-  @ApiOperation("根据ID删除后台资源")
+  @Operation(summary = "根据ID删除后台资源")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Integer id) {
@@ -79,7 +80,7 @@ public class AdminResourceController {
     }
   }
 
-  @ApiOperation("分页模糊查询后台资源")
+  @Operation(summary = "分页模糊查询后台资源")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<AdminResource>> list(
@@ -93,7 +94,7 @@ public class AdminResourceController {
     return CommonResult.success(CommonPage.toPage(resourceList));
   }
 
-  @ApiOperation("查询所有后台资源")
+  @Operation(summary = "查询所有后台资源")
   @RequestMapping(value = "/listAll", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<List<AdminResource>> listAll() {

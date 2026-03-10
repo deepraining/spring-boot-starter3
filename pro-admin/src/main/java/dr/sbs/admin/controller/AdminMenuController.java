@@ -6,9 +6,10 @@ import dr.sbs.admin.service.AdminMenuService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
 import dr.sbs.mp.entity.AdminMenu;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,12 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /** 后台菜单管理 */
 @Controller
-@Api(tags = "AdminMenuController", description = "后台菜单管理")
+@Tag(name = "AdminMenuController", description = "后台菜单管理")
 @RequestMapping("/adminMenu")
 public class AdminMenuController {
   @Autowired private AdminMenuService menuService;
 
-  @ApiOperation("添加后台菜单")
+  @Operation(summary = "添加后台菜单")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> create(
@@ -40,7 +41,7 @@ public class AdminMenuController {
     }
   }
 
-  @ApiOperation("修改后台菜单")
+  @Operation(summary = "修改后台菜单")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
@@ -55,7 +56,7 @@ public class AdminMenuController {
     }
   }
 
-  @ApiOperation("根据ID获取菜单详情")
+  @Operation(summary = "根据ID获取菜单详情")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminMenu> getItem(@PathVariable Integer id) {
@@ -63,7 +64,7 @@ public class AdminMenuController {
     return CommonResult.success(adminMenu);
   }
 
-  @ApiOperation("根据ID删除后台菜单")
+  @Operation(summary = "根据ID删除后台菜单")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Integer id) {
@@ -75,7 +76,7 @@ public class AdminMenuController {
     }
   }
 
-  @ApiOperation("分页查询后台菜单")
+  @Operation(summary = "分页查询后台菜单")
   @RequestMapping(value = "/list/{parentId}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<AdminMenu>> list(
@@ -86,7 +87,7 @@ public class AdminMenuController {
     return CommonResult.success(CommonPage.toPage(menuList));
   }
 
-  @ApiOperation("树形结构返回所有菜单列表")
+  @Operation(summary = "树形结构返回所有菜单列表")
   @RequestMapping(value = "/treeList", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<List<AdminMenuNode>> treeList() {
@@ -94,7 +95,7 @@ public class AdminMenuController {
     return CommonResult.success(list);
   }
 
-  @ApiOperation("修改菜单显示状态")
+  @Operation(summary = "修改菜单显示状态")
   @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> updateHidden(

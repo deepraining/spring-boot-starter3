@@ -10,13 +10,14 @@ import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
 import dr.sbs.mp.entity.AdminRole;
 import dr.sbs.mp.entity.AdminUser;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /** 后台用户管理 */
 @Controller
-@Api(tags = "AdminController", description = "后台用户管理")
+@Tag(name = "AdminController", description = "后台用户管理")
 @RequestMapping("/admin")
 public class AdminController {
   @Value("${jwt.tokenHeader}")
@@ -43,7 +44,7 @@ public class AdminController {
 
   @Autowired private AdminUserService userService;
 
-  @ApiOperation(value = "用户注册")
+  @Operation(summary = "用户注册")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<AdminUser> register(
@@ -55,7 +56,7 @@ public class AdminController {
     return CommonResult.success(ResultFilter.filterAdminUser(adminUser));
   }
 
-  @ApiOperation(value = "登录以后返回token")
+  @Operation(summary = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Map<String, String>> login(
@@ -70,7 +71,7 @@ public class AdminController {
     return CommonResult.success(tokenMap);
   }
 
-  @ApiOperation(value = "刷新token")
+  @Operation(summary = "刷新token")
   @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<Map<String, String>> refreshToken(HttpServletRequest request) {
@@ -85,7 +86,7 @@ public class AdminController {
     return CommonResult.success(tokenMap);
   }
 
-  @ApiOperation(value = "获取当前登录用户信息")
+  @Operation(summary = "获取当前登录用户信息")
   @RequestMapping(value = "/info", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<Map<String, Object>> getAdminInfo(Principal principal) {
@@ -103,14 +104,14 @@ public class AdminController {
     return CommonResult.success(data);
   }
 
-  @ApiOperation(value = "登出功能")
+  @Operation(summary = "登出功能")
   @RequestMapping(value = "/logout", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Object> logout() {
     return CommonResult.success(null);
   }
 
-  @ApiOperation("根据用户名或姓名分页获取用户列表")
+  @Operation(summary = "根据用户名或姓名分页获取用户列表")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<AdminUser>> list(
@@ -129,7 +130,7 @@ public class AdminController {
     return CommonResult.success(CommonPage.toPage(adminList));
   }
 
-  @ApiOperation("获取指定用户信息")
+  @Operation(summary = "获取指定用户信息")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminUser> getItem(@PathVariable Integer id) {
@@ -137,7 +138,7 @@ public class AdminController {
     return CommonResult.success(ResultFilter.filterAdminUser(adminUser));
   }
 
-  @ApiOperation("修改指定用户信息")
+  @Operation(summary = "修改指定用户信息")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
@@ -151,7 +152,7 @@ public class AdminController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("修改指定用户密码")
+  @Operation(summary = "修改指定用户密码")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> updatePassword(
@@ -171,7 +172,7 @@ public class AdminController {
     }
   }
 
-  @ApiOperation("删除指定用户信息")
+  @Operation(summary = "删除指定用户信息")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Integer id) {
@@ -182,7 +183,7 @@ public class AdminController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("修改帐号状态")
+  @Operation(summary = "修改帐号状态")
   @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> updateStatus(
@@ -196,7 +197,7 @@ public class AdminController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("给用户分配角色")
+  @Operation(summary = "给用户分配角色")
   @RequestMapping(value = "/role/update", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> updateRole(
@@ -208,7 +209,7 @@ public class AdminController {
     return CommonResult.failed();
   }
 
-  @ApiOperation("获取指定用户的角色")
+  @Operation(summary = "获取指定用户的角色")
   @RequestMapping(value = "/role/{userId}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<List<AdminRole>> getRoleList(@PathVariable Integer userId) {

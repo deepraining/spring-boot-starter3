@@ -2,7 +2,7 @@ package dr.sbs.admin.dto;
 
 import dr.sbs.mp.entity.Article;
 import dr.sbs.mp.entity.FrontUser;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 public class ArticleRecord extends Article {
   // position从1000开始，每次增加10，预防中间插入留置
-  @ApiModelProperty(value = "前端用户", position = 1000)
+  @Schema(description = "前端用户")
   private FrontUser frontUser;
 }
