@@ -3,10 +3,9 @@ package dr.sbs.admin.controller;
 import dr.sbs.admin.service.AdminResourceCategoryService;
 import dr.sbs.common.CommonResult;
 import dr.sbs.mp.entity.AdminResourceCategory;
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

@@ -1,9 +1,9 @@
 package dr.sbs.common.util;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import jakarta.servlet.http.HttpServletRequest;
 
 public class RequestUtil {
   /** Get url basePath, scheme://domain:port */

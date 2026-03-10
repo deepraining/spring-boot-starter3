@@ -13,6 +13,7 @@ public class SbsCacheKey {
   /** front */
   // 示例
   public static final String FRONT_EXAMPLE = "example";
+
   // 用户信息
   public static final String FRONT_USER = "user";
   // 微信用户信息
@@ -22,6 +23,7 @@ public class SbsCacheKey {
   /** common */
   // 前端用户数据库行
   public static final String COMMON_FRONT_USER_ROW = "frontUserRow";
+
   // 文章数据库行
   public static final String COMMON_ARTICLE_ROW = "articleRow";
 }

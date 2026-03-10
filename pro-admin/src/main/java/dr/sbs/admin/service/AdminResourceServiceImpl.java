@@ -45,7 +45,11 @@ public class AdminResourceServiceImpl implements AdminResourceService {
 
   @Override
   public Page<AdminResource> list(
-      Integer categoryId, String nameKeyword, String urlKeyword, Integer pageSize, Integer pageNum) {
+      Integer categoryId,
+      String nameKeyword,
+      String urlKeyword,
+      Integer pageSize,
+      Integer pageNum) {
     Page<AdminResource> page = new Page<>();
     page.setCurrent(pageNum);
     page.setSize(pageSize);

@@ -32,7 +32,8 @@ public class SecurityConfig {
             auth ->
                 auth.requestMatchers("/user", "/api/user/**")
                     .authenticated()
-                    // Every cross origin request will make a OPTIONS request before its real request
+                    // Every cross origin request will make a OPTIONS request before its real
+                    // request
                     .requestMatchers(HttpMethod.OPTIONS, "/**")
                     .permitAll()
                     .anyRequest()

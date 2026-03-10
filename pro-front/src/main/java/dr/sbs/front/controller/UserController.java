@@ -25,11 +25,9 @@ public class UserController {
   @RequestMapping(value = "/articles", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<Article>> articles(
-      @RequestParam(value = "pageSize", defaultValue = "10")
-          @Parameter(description = "每页条数")
+      @RequestParam(value = "pageSize", defaultValue = "10") @Parameter(description = "每页条数")
           Integer pageSize,
-      @RequestParam(value = "pageNum", defaultValue = "1")
-          @Parameter(description = "页码")
+      @RequestParam(value = "pageNum", defaultValue = "1") @Parameter(description = "页码")
           Integer pageNum) {
     Page<Article> list = articleService.myList(pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(list));

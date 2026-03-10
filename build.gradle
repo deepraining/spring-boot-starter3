@@ -18,7 +18,7 @@ plugins {
   id 'application'
   id 'idea'
   id 'checkstyle'
-  id 'com.github.sherter.google-java-format' version '0.9'
+  id 'com.diffplug.spotless' version '8.3.0'
   id 'org.springframework.boot' version '3.5.11'
   id "io.freefair.lombok" version "9.2.0"
   id "io.spring.dependency-management" version "1.1.7"
@@ -83,15 +83,18 @@ subprojects {
   }
 }
 
-def mpMapperPath = 'pro-mp/src/main/java/dr/sbs/mp/mapper/'
-def mpEntityPath = 'pro-mp/src/main/java/dr/sbs/mp/entity/'
-def mpServicePath = 'pro-mp/src/main/java/dr/sbs/mp/service/'
-
-googleJavaFormat {
-  toolVersion = "1.8"
-  exclude mpMapperPath
-  exclude mpEntityPath
-  exclude mpServicePath
+spotless {
+  java {
+    if (System.properties.spotlessInclude != null) {
+      def s = ((String)System.properties.spotlessInclude).split(',')
+      def i = Arrays.asList(s)
+      target  i
+    }
+    else {
+      target 'pro-common/**/java/**/*.java', 'pro-admin/**/java/**/*.java', 'pro-front/**/java/**/*.java'
+    }
+    googleJavaFormat()
+  }
 }
 
 checkstyle {
@@ -108,16 +111,7 @@ checkstyle {
 task checkJava(type: Checkstyle) {
   configFile = file('config/checkstyle/checkstyle.xml')
   classpath = files()
-  source './'
-  exclude mpMapperPath
-  exclude mpEntityPath
-  exclude mpServicePath
-
-  if (System.properties.checkJavaInclude != null) {
-    def s = ((String)System.properties.checkJavaInclude).split(',')
-    def i = Arrays.asList(s)
-    include i
-  }
+  source 'pro-common/**/java/**/*.java', 'pro-admin/**/java/**/*.java', 'pro-front/**/java/**/*.java'
 }
 
 try {

@@ -7,10 +7,9 @@ import dr.sbs.common.CommonResult;
 import dr.sbs.mp.entity.AdminMenu;
 import dr.sbs.mp.entity.AdminResource;
 import dr.sbs.mp.entity.AdminRole;
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,7 +44,9 @@ public class AdminRoleController {
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<Integer> update(
-      @PathVariable Integer id, @RequestBody @Validated AdminRole role, BindingResult bindingResult) {
+      @PathVariable Integer id,
+      @RequestBody @Validated AdminRole role,
+      BindingResult bindingResult) {
     boolean result = roleService.update(id, role);
     if (result) {
       return CommonResult.success(1);

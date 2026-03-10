@@ -31,14 +31,11 @@ public class ArticleController {
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<CommonPage<ArticleRecord>> list(
-      @RequestParam(value = "pageSize", defaultValue = "10")
-          @Parameter(description = "每页条数")
+      @RequestParam(value = "pageSize", defaultValue = "10") @Parameter(description = "每页条数")
           Integer pageSize,
-      @RequestParam(value = "pageNum", defaultValue = "1")
-      @Parameter(description = "页码")
+      @RequestParam(value = "pageNum", defaultValue = "1") @Parameter(description = "页码")
           Integer pageNum,
-      @RequestParam(value = "searchKey", defaultValue = "")
-          @Parameter(description = "搜索关键字")
+      @RequestParam(value = "searchKey", defaultValue = "") @Parameter(description = "搜索关键字")
           String searchKey) {
     Page<ArticleRecord> articleList = articleService.list(searchKey, pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(articleList));
