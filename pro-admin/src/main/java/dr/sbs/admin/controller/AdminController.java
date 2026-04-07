@@ -75,6 +75,9 @@ public class AdminController {
   @ResponseBody
   public CommonResult<Map<String, String>> refreshToken(HttpServletRequest request) {
     String token = request.getHeader(tokenHeader);
+    if (token != null && token.startsWith(tokenHead)) {
+      token = token.substring(tokenHead.length()).trim(); // The part after "Bearer "
+    }
     String refreshToken = userService.refreshToken(token);
     if (refreshToken == null) {
       return CommonResult.failed("token已经过期！");
