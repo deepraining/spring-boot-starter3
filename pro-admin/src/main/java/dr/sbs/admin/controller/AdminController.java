@@ -20,18 +20,16 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /** 后台用户管理 */
-@Controller
+@RestController
 @Tag(name = "AdminController", description = "后台用户管理")
 @RequestMapping("/admin")
 public class AdminController {
@@ -45,9 +43,7 @@ public class AdminController {
 
   @Operation(summary = "用户注册")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  @ResponseBody
-  public CommonResult<AdminUser> register(
-      @RequestBody @Validated AdminUserParam adminUserParam, BindingResult bindingResult) {
+  public CommonResult<AdminUser> register(@RequestBody @Validated AdminUserParam adminUserParam) {
     AdminUser adminUser = userService.register(adminUserParam);
     if (adminUser == null) {
       return CommonResult.failed();
@@ -57,9 +53,8 @@ public class AdminController {
 
   @Operation(summary = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Map<String, String>> login(
-      @RequestBody @Validated AdminLoginParam adminLoginParam, BindingResult bindingResult) {
+      @RequestBody @Validated AdminLoginParam adminLoginParam) {
     String token = userService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
     if (token == null) {
       return CommonResult.validateFailed("用户名或密码错误");
@@ -72,7 +67,6 @@ public class AdminController {
 
   @Operation(summary = "刷新token")
   @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<Map<String, String>> refreshToken(HttpServletRequest request) {
     String token = request.getHeader(tokenHeader);
     if (token != null && token.startsWith(tokenHead)) {
@@ -90,7 +84,6 @@ public class AdminController {
 
   @Operation(summary = "获取当前登录用户信息")
   @RequestMapping(value = "/info", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<Map<String, Object>> getAdminInfo(Principal principal) {
     if (principal == null) {
       return CommonResult.unauthorized();
@@ -108,14 +101,12 @@ public class AdminController {
 
   @Operation(summary = "登出功能")
   @RequestMapping(value = "/logout", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Object> logout() {
     return CommonResult.success(null);
   }
 
   @Operation(summary = "根据用户名或姓名分页获取用户列表")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<CommonPage<AdminUser>> list(
       @RequestParam(value = "keyword", required = false) String keyword,
       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
@@ -134,7 +125,6 @@ public class AdminController {
 
   @Operation(summary = "获取指定用户信息")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<AdminUser> getItem(@PathVariable Integer id) {
     AdminUser adminUser = userService.getItem(id);
     return CommonResult.success(ResultFilter.filterAdminUser(adminUser));
@@ -142,11 +132,8 @@ public class AdminController {
 
   @Operation(summary = "修改指定用户信息")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> update(
-      @PathVariable Integer id,
-      @RequestBody @Validated AdminUser adminUser,
-      BindingResult bindingResult) {
+      @PathVariable Integer id, @RequestBody @Validated AdminUser adminUser) {
     boolean result = userService.update(id, adminUser);
     if (result) {
       return CommonResult.success(1);
@@ -156,10 +143,8 @@ public class AdminController {
 
   @Operation(summary = "修改指定用户密码")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> updatePassword(
-      @RequestBody @Validated AdminUpdatePasswordParam updatePasswordParam,
-      BindingResult bindingResult) {
+      @RequestBody @Validated AdminUpdatePasswordParam updatePasswordParam) {
     int status = userService.updatePassword(updatePasswordParam);
     if (status > 0) {
       return CommonResult.success(status);
@@ -176,7 +161,6 @@ public class AdminController {
 
   @Operation(summary = "删除指定用户信息")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Integer id) {
     boolean result = userService.delete(id);
     if (result) {
@@ -187,7 +171,6 @@ public class AdminController {
 
   @Operation(summary = "修改帐号状态")
   @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> updateStatus(
       @PathVariable Integer id, @RequestParam(value = "status") Integer status) {
     AdminUser adminUser = new AdminUser();
@@ -201,7 +184,6 @@ public class AdminController {
 
   @Operation(summary = "给用户分配角色")
   @RequestMapping(value = "/role/update", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> updateRole(
       @RequestParam("userId") Integer userId, @RequestParam("roleIds") List<Integer> roleIds) {
     boolean result = userService.updateRole(userId, roleIds);
@@ -213,7 +195,6 @@ public class AdminController {
 
   @Operation(summary = "获取指定用户的角色")
   @RequestMapping(value = "/role/{userId}", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<List<AdminRole>> getRoleList(@PathVariable Integer userId) {
     List<AdminRole> roleList = userService.getRoleList(userId);
     return CommonResult.success(roleList);

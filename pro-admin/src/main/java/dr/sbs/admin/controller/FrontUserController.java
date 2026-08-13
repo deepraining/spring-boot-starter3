@@ -10,18 +10,16 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /** 前端用户管理 */
-@Controller
+@RestController
 @Tag(name = "FrontUserController", description = "前端用户管理")
 @RequestMapping("/frontUser")
 public class FrontUserController {
@@ -29,7 +27,6 @@ public class FrontUserController {
 
   @Operation(summary = "查询前端用户列表")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<CommonPage<FrontUser>> list(
       @RequestParam(value = "pageSize", defaultValue = "10") @Parameter(description = "每页条数")
           Integer pageSize,
@@ -43,10 +40,8 @@ public class FrontUserController {
 
   @Operation(summary = "添加前端用户")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> create(
-      @RequestBody @Validated FrontUserCreateParam frontUserCreateParam,
-      BindingResult bindingResult) {
+      @RequestBody @Validated FrontUserCreateParam frontUserCreateParam) {
     boolean result = frontUserService.create(frontUserCreateParam);
     if (result) {
       return CommonResult.success(1);
@@ -57,11 +52,8 @@ public class FrontUserController {
 
   @Operation(summary = "修改前端用户")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> update(
-      @PathVariable Long id,
-      @RequestBody @Validated FrontUserCreateParam frontUserCreateParam,
-      BindingResult bindingResult) {
+      @PathVariable Long id, @RequestBody @Validated FrontUserCreateParam frontUserCreateParam) {
     boolean result = frontUserService.update(id, frontUserCreateParam);
     if (result) {
       return CommonResult.success(1);
@@ -72,7 +64,6 @@ public class FrontUserController {
 
   @Operation(summary = "根据ID删除前端用户")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> delete(@PathVariable Long id) {
     boolean result = frontUserService.delete(id);
     if (result) {

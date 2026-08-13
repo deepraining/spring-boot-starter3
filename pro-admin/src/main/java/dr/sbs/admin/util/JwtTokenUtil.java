@@ -134,8 +134,10 @@ public class JwtTokenUtil {
     if (tokenRefreshJustBefore(oldToken, 30 * 60)) {
       return oldToken;
     } else {
-      claims.put(CLAIM_KEY_CREATED, new Date());
-      return generateToken(claims);
+      Map<String, Object> newClaims = new HashMap<>();
+      newClaims.put(CLAIM_KEY_USERNAME, claims.get(CLAIM_KEY_USERNAME));
+      newClaims.put(CLAIM_KEY_CREATED, new Date());
+      return generateToken(newClaims);
     }
   }
 

@@ -2,6 +2,9 @@ package dr.sbs.admin.component;
 
 import dr.sbs.common.CommonResult;
 import dr.sbs.common.exception.ApiException;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,5 +21,16 @@ public class GlobalExceptionHandler {
       return CommonResult.failed(e.getErrorCode());
     }
     return CommonResult.failed(e.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(value = MethodArgumentNotValidException.class)
+  public CommonResult handle(MethodArgumentNotValidException e) {
+    // 只展示第一个信息
+    List<String> errorTexts = new ArrayList<>();
+    e.getBindingResult()
+        .getFieldErrors()
+        .forEach(error -> errorTexts.add(error.getDefaultMessage()));
+    return CommonResult.failed(errorTexts.size() > 0 ? errorTexts.get(0) : "参数有误");
   }
 }

@@ -9,12 +9,10 @@ import dr.sbs.mp.entity.FrontUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,9 +23,7 @@ public class AccountController {
 
   @Operation(summary = "Sign up")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  @ResponseBody
-  public CommonResult<FrontUser> register(
-      @RequestBody @Validated UserCreateParam userCreateParam, BindingResult bindingResult) {
+  public CommonResult<FrontUser> register(@RequestBody @Validated UserCreateParam userCreateParam) {
     FrontUser user = userService.register(userCreateParam);
     if (user != null) {
       return CommonResult.success(ResultFilter.filterFrontUser(user));
@@ -37,10 +33,8 @@ public class AccountController {
 
   @Operation(summary = "Update password")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> updatePassword(
-      @RequestBody @Validated UpdatePasswordParam updatePasswordParam,
-      BindingResult bindingResult) {
+      @RequestBody @Validated UpdatePasswordParam updatePasswordParam) {
     boolean result = userService.updatePassword(updatePasswordParam);
     if (result) return CommonResult.success(1);
     return CommonResult.failed();
@@ -48,7 +42,6 @@ public class AccountController {
 
   @Operation(summary = "Current user information")
   @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<FrontUser> currentUser() {
     FrontUser user = userService.getCurrentUser();
     if (user != null) return CommonResult.success(ResultFilter.filterFrontUser(user));

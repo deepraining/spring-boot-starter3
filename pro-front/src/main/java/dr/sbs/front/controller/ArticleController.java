@@ -12,14 +12,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,9 +29,8 @@ public class ArticleController {
 
   @Operation(summary = "Create article")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> create(
-      @RequestBody @Validated ArticleCreateParam articleCreateParam, BindingResult bindingResult) {
+      @RequestBody @Validated ArticleCreateParam articleCreateParam) {
     FrontUser user = userService.getCurrentUser();
     if (user == null) {
       return CommonResult.unauthorized("Not Logged-in");
@@ -48,11 +45,8 @@ public class ArticleController {
 
   @Operation(summary = "Update article")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> update(
-      @PathVariable Long id,
-      @RequestBody @Validated ArticleCreateParam articleCreateParam,
-      BindingResult bindingResult) {
+      @PathVariable Long id, @RequestBody @Validated ArticleCreateParam articleCreateParam) {
     FrontUser user = userService.getCurrentUser();
     if (user == null) {
       return CommonResult.unauthorized("Not logged in");
@@ -72,7 +66,6 @@ public class ArticleController {
 
   @Operation(summary = "Delete article")
   @RequestMapping(value = "/delete", method = RequestMethod.POST)
-  @ResponseBody
   public CommonResult<Integer> delete(@RequestParam Long id) {
     FrontUser user = userService.getCurrentUser();
     if (user == null) {
@@ -93,7 +86,6 @@ public class ArticleController {
 
   @Operation(summary = "Query list")
   @RequestMapping(value = "/list", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<CommonPage<Article>> list(
       @RequestParam(value = "pageSize", defaultValue = "10") @Parameter(description = "每页条数")
           Integer pageSize,
@@ -107,7 +99,6 @@ public class ArticleController {
 
   @Operation(summary = "Get a record")
   @RequestMapping(value = "/record/{id}", method = RequestMethod.GET)
-  @ResponseBody
   public CommonResult<Article> record(@PathVariable long id) {
     Article article = articleService.getItem(id);
     return CommonResult.success(article);
